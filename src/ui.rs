@@ -24,7 +24,7 @@ use unicode_width::UnicodeWidthStr;
 
 use crate::{searchable::Searchable, ssh};
 
-const INFO_TEXT: &str = "(Esc) quit | (↑) move up | (↓) move down | (enter) select";
+const INFO_TEXT: &str = "(Esc) quit | (�?) move up | (�?) move down | (enter) select";
 
 #[derive(Clone)]
 pub struct AppConfig {
@@ -253,11 +253,11 @@ impl App {
 
         match key.code {
             Char('c') => AppKeyAction::Stop,
-            Char('j') => {
+            Char('n') => {
                 self.next();
                 AppKeyAction::Ok
             }
-            Char('k') => {
+            Char('p') => {
                 self.previous();
                 AppKeyAction::Ok
             }
@@ -479,7 +479,7 @@ fn render_table(f: &mut Frame, app: &mut App, area: Rect) {
             .collect::<Row>()
     });
 
-    let bar = " █ ";
+    let bar = " �? ";
     let t = Table::new(rows, app.table_columns_constraints.clone())
         .header(header)
         .highlight_style(selected_style)
